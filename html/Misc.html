@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Misc</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript">
+    function changeImage(){
+        y=document.getElementById("miscImages")
+        if(y.getAttribute('src') == "../img/lappy.jpg")
+        {
+            y.src = "../img/sky.jpg";
+        }
+        else if(y.getAttribute('src') == "../img/sky.jpg")
+        {    
+            y.src = "../img/goggles.jpg";
+        }
+        else if(y.getAttribute('src') == "../img/goggles.jpg")
+        {    
+            y.src = "../img/shoes.jpg";
+        }
+        else if(y.getAttribute('src') == "../img/shoes.jpg")
+        {    
+            y.src = "../img/diwali.jpg";        
+        }
+        else if(y.getAttribute('src') == "../img/diwali.jpg")
+        {    
+            y.src = "../img/lappy.jpg";        
+        }
+    }
+    </script>
+</head>
+<body>
+    <div style="background-color: #ebebe0;">
+        <span style="cursor: pointer;" class="btn" onclick="showDivOnClick()">☰</span>
+    </div>
+    <div id="navBar">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+                <li><a href="#" style="background-color: #f5f5f0;">Misc</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+		document.getElementById("navBar").style.position="fixed";
+		document.getElementById("navBar").style.float="left";
+	</script>
+    <div class="MainName">Nitin Chandak</div>
+    <h1 style="text-align: center;margin-top: 100px;">
+        Try clicking!
+    </h1>
+    <p>
+        <img src="../img/lappy.jpg" alt="laptop" id="miscImages" onclick="changeImage()">
+    </p>
+    <form id="formSubmit">
+        <div>
+            <h1>Name</h1>
+            <input type="text" placeholder="Name" id="Name" name="Name" required>
+        </div>
+        <div>
+            <h1>Skill</h1>
+            <select type="select" id="Skill" name="Select" required>
+                <option selected disabled value="">Select Skill</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="javascript">javascript</option>
+                <option value="HTML">HTML</option>
+            </select>
+        </div>
+        <div>
+            <h1>Level</h1>
+            <select type="select" id="Level" name="Select" required>
+                <option selected disabled value="">Select Level</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Proficient">Proficient</option>
+            </select>
+        </div>
+        <div>
+            <h1>Comments</h1>
+            <textarea name="Comments" id="Comments" cols="46" rows="5" placeholder="Give me a thumps up!!" required></textarea>
+        </div>
+        <div style="text-align:right">
+            <input type="submit" value="Submit" id="submitButton">
+        </div>
+    </form>
+    <table id="dataTable">
+        <thead>
+            <tr style="transform: none;transition: none;box-shadow: none;">
+                <th colspan="5" style="font-size: 30px;" id="feedback">FeedBack</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th>#</th>
+            <th>NAME</th>
+            <th>SKILL</th>
+            <th>LEVEL</th>
+            <th>COMMENTS</th>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+    
+//console.log(document.getElementById("formSubmit"))
+if (document.getElementById("formSubmit")) {
+    var formSubmit = document.getElementById("formSubmit");
+    
+  
+    var data=[];
+    var submissionCounter = 0;
+    //console.log(localStorage.getItem('data'))
+    //console.log(data.length)
+    if(localStorage.getItem('data')!=null){
+        data = JSON.parse(localStorage["data"]);
+        submissionCounter = data[data.length-1].entry;
+      }
+  
+      for(i=0; i<data.length; i++)
+      {
+        var row = document.getElementById("dataTable").insertRow();
+        var cell1 = row.insertCell(0);  
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+  
+        cell1.innerHTML = data[i].entry;
+        cell2.innerHTML = data[i].name;
+        cell3.innerHTML = data[i].skill;
+        cell4.innerHTML = data[i].level;
+        cell5.innerHTML = data[i].comments;
+      } 
+      
+  
+    formSubmit.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+      var personName = document.getElementById("Name").value;
+      var skill = document.getElementById("Skill").value;
+      var level = document.getElementById("Level").value;
+      var comments = document.getElementById("Comments").value;
+      addFeedback(personName, skill, level , comments);
+      clearForm();
+    });
+  
+    
+    function addFeedback(personName, skill, level , comments) {   
+  
+      submissionCounter += 1;
+  
+      data.push({
+  
+          entry: submissionCounter,  
+          name: personName,
+          skill: skill,
+          level: level,
+          comments: comments
+      });
+    
+      localStorage.setItem('data', JSON.stringify(data));
+  
+        var row = document.getElementById("dataTable").insertRow();
+        var cell1 = row.insertCell(0);  
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        console.log("in insert" );
+        cell1.innerHTML = data[data.length-1].entry;
+        cell2.innerHTML = data[data.length-1].name;
+        cell3.innerHTML = data[data.length-1].skill;
+        cell4.innerHTML = data[data.length-1].level;
+        cell5.innerHTML = data[data.length-1].comments;
+      
+    }
+  
+  
+    function clearForm() {
+      document.getElementById("Name").value = ""; 
+      document.getElementById("Skill").selectedIndex = 0; 
+      document.getElementById("Level").selectedIndex = 0;
+      document.getElementById("Comments").value= "";
+    }
+  
+  }
+
+    </script>
+    <div>
+        <h1 class="likeline">like</h1>
+        <input type="image" id="heart" alt="like me" src="../img/heart.jpg" onclick="visited()"> 
+    </div>
+    <p style="text-align: center;font-size: 30px;">You have liked my page <b><span id="likes"></span></b> times. </p>
+    
+    <script>
+        if (document.getElementById("heart")) {
+        var count = 0;
+        var button = document.getElementById("heart");
+        var display = document.getElementById("likes");
+        if (localStorage.getItem('count')) {
+            count = localStorage.getItem('count')
+        } else count = 0;
+        display.innerHTML = count;
+        
+        button.onclick = function () {
+            count++;
+            localStorage.setItem('count', count);
+            display.innerHTML = count;
+        } 
+    }
+    
+    </script>
+    <button onclick="goToTop()" id="topButton" style="display: none;">&#8593;</button>
+	<script>
+		myButton = document.getElementById('topButton');
+		window.onscroll=function(){scrollfunction()};
+		function scrollfunction(){
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				myButton.style.display = "block";
+			} else {
+				myButton.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>

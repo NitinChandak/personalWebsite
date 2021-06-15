@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<script type="text/javascript" src="../js/index.js"></script>
+</head>
+<body>
+    <div style="background-color: #f5f5f0;">
+        <span style="cursor: pointer;" class="btn" onclick="showDivOnClick()">☰</span>
+    </div>
+    <div id="navBar" >
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#" style="background-color: #f2f2f2;">Contact</a></li>
+                <li><a href="Misc.html">Misc</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+		document.getElementById("navBar").style.position="fixed";
+		document.getElementById("navBar").style.float="left";
+	</script>
+    <div class="MainName">Nitin Chandak</div>
+    <div class="icons">
+        <div class="row">
+            <div class="column">
+                <a href="https://www.instagram.com/chandak805/" target="_blank"><img src="../img/instagram.png" alt="Instagram"></a>
+            </div>
+            <div class="column">
+                <a href="https://www.facebook.com/nitin.chandak.79" target="_blank"><img src="../img/facebook.png" alt="Facebook"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <a href="https://github.com/NitinChandak" target="_blank"><img src="../img/github-logo.png" alt="Github"></a>
+            </div>
+            <div class="column">
+                <a href="#"><abbr title="nitin8chandak@gmail.com" target="_blank"><img src="../img/Mail.png" alt="Gmail"></abbr></a>
+            </div>
+        </div>
+    </div>
+    <button onclick="goToTop()" id="topButton" style="display: none;">&#8593;</button>
+	<script>
+		myButton = document.getElementById('topButton');
+		window.onscroll=function(){scrollfunction()};
+		function scrollfunction(){
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				myButton.style.display = "block";
+			} else {
+				myButton.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>
